@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM --platform=linux/amd64 node:18.13.0-alpine3.17
 
 ARG BUILD_DATE
 
@@ -8,7 +8,7 @@ LABEL maintainer="Chris Turra <cturra@gmail.com>"
 LABEL documentation="https://github.com/cturra/docker-ntp"
 
 # install chrony
-RUN apk add --no-cache chrony
+RUN apk add --no-cache chrony openssh-client libc6-compat g++ git zip linux-headers make python3 ca-certificates gettext libintl jq logrotate aws-cli curl
 
 # script to configure/startup chrony (ntp)
 COPY assets/startup.sh /opt/ntp_startup.sh
